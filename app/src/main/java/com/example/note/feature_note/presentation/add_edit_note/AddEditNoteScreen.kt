@@ -51,6 +51,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -92,7 +93,6 @@ fun AddEditNoteScreen(
                     )
                     navController.navigateUp()
                 }
-
                 AddEditViewModel.UiEvent.SaveTask -> {
                     navController.navigateUp()
                 }
@@ -134,7 +134,8 @@ fun AddEditNoteScreen(
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            Column(modifier = Modifier.padding(10.dp)
+            Column(
+                modifier = Modifier.padding(10.dp)
             ) {
                 TransparentTextField(
                     text = titleState.text,
@@ -145,7 +146,8 @@ fun AddEditNoteScreen(
                     onFocusChange = {
                         viewModel.onEvent(AddEditNoteEvent.ChangeTitleFocus(it))
                     },
-                    isSingleLine = true
+                    isSingleLine = true,
+                    textStyle = AppTheme.appTypograhy.title
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 TransparentTextField(
@@ -156,53 +158,56 @@ fun AddEditNoteScreen(
                     },
                     onFocusChange = {
                         viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
-                    }
+                    },
+                    textStyle = AppTheme.appTypograhy.content
                 )
 
             }
-
-        }
-        AnimatedVisibility(
-            visible = state.isColorButtonsVisible,
-            enter = fadeIn() + slideInVertically(),
-            exit = fadeOut() + slideOutVertically(),
-        ) {
+            AnimatedVisibility(
+                visible = state.isColorButtonsVisible,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically(),
+                modifier = Modifier.align(Alignment.BottomCenter)
+                    .padding(5.dp)
+            ) {
 //            ColorButtons(noteColor = noteColor, scope = scope, viewModel = viewModel)
 
-            LazyRow(modifier = Modifier.fillMaxWidth()) {
-                items(Note.noteColors) { color ->
-                    val colorInt = color.toArgb()
-                    Box(modifier = Modifier
-                        .size(50.dp)
-                        .shadow(15.dp, CircleShape)
-                        .background(color)
-                        .border(
-                            width = 3.dp,
-                            color = if (viewModel.noteColor.value == colorInt) {
-                                Color.Black
-                            } else {
-                                Color.Transparent
-                            },
-                            shape = CircleShape
-                        )
-                        .clickable {
-                            scope.launch {
-                                noteBackGroundAnimatable.animateTo(
-                                    targetValue = Color(colorInt),
-                                    animationSpec = tween(
-                                        durationMillis = 500
+                LazyRow(modifier = Modifier.fillMaxWidth()) {
+                    items(Note.noteColors) { color ->
+                        val colorInt = color.toArgb()
+                        Box(modifier = Modifier
+                            .size(50.dp)
+                            .clip(CircleShape)
+                            .shadow(15.dp, CircleShape)
+                            .background(color)
+                            .border(
+                                width = 3.dp,
+                                color = if (viewModel.noteColor.value == colorInt) {
+                                    Color.Black
+                                } else {
+                                    Color.Transparent
+                                },
+                                shape = CircleShape
+                            )
+                            .clickable {
+                                scope.launch {
+                                    noteBackGroundAnimatable.animateTo(
+                                        targetValue = Color(colorInt),
+                                        animationSpec = tween(
+                                            durationMillis = 500
+                                        )
                                     )
-                                )
-
+                                }
+                                viewModel.onEvent(AddEditNoteEvent.ChangeColor(colorInt))
+                                viewModel.onEvent(AddEditNoteEvent.ToggleColorSection)
                             }
-                            viewModel.onEvent(AddEditNoteEvent.ChangeColor(colorInt))
-                            viewModel.onEvent(AddEditNoteEvent.ToggleColorSection)
-                        }
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                    }
                 }
             }
         }
+
     }
     Box(modifier = Modifier.fillMaxSize()) {
         FloatingActionButton(

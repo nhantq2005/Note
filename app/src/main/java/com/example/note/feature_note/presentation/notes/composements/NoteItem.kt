@@ -47,7 +47,7 @@ fun NoteItem(
     val scope = rememberCoroutineScope()
     Card(
         modifier = modifier
-            .shadow(8.dp)
+            .shadow(8.dp, RoundedCornerShape(13.dp))
             .fillMaxWidth()
             .height(250.dp)
             .clip(RoundedCornerShape(5.dp)),
@@ -62,9 +62,11 @@ fun NoteItem(
             ) {
                 Text(
                     text = note.title,
-                    style = AppTheme.appTypograhy.title
+                    style = AppTheme.appTypograhy.title,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-                Spacer(modifier = Modifier.padding(10.dp))
+                Spacer(modifier = Modifier.padding(5.dp))
                 Text(
                     text = note.content,
                     style = AppTheme.appTypograhy.content,

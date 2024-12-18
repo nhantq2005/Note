@@ -16,38 +16,46 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import com.example.note.ui.theme.AppTheme
 import com.example.note.ui.theme.NoteTheme
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransparentTextField(
-        text: String,
-        hint: String,
-        onChangeValue: (String) -> Unit,
-        isSingleLine: Boolean = false,
-        onFocusChange: (FocusState) -> Unit,
-        modifier: Modifier = Modifier
+    text: String,
+    hint: String,
+    onChangeValue: (String) -> Unit,
+    isSingleLine: Boolean = false,
+    onFocusChange: (FocusState) -> Unit,
+    textStyle: TextStyle
 ) {
     TextField(
-            value = text,
-            onValueChange = onChangeValue,
-            modifier = Modifier
-                    .fillMaxWidth()
-                    .onFocusChanged {
-                        onFocusChange(it)
-                    },
-            label = { Text(text = hint) },
-            keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done
-            ),
-            singleLine = isSingleLine,
-            colors = TextFieldDefaults.textFieldColors(containerColor = Color.Transparent,
-                    textColor = Color.Black,
-                    focusedLabelColor = Color.Black,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent)
+        value = text,
+        onValueChange = onChangeValue,
+        textStyle = textStyle,
+        modifier = Modifier
+            .fillMaxWidth()
+            .onFocusChanged {
+                onFocusChange(it)
+            },
+        label = { Text(text = hint, fontSize = 16.sp) },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done
+        ),
+        singleLine = isSingleLine,
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color.Transparent,
+            textColor = Color.Black,
+            focusedLabelColor = Color.Black,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        )
+
     )
 }
 

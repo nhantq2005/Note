@@ -20,7 +20,7 @@ fun AppTheme(
         content = TextStyle(
             fontFamily = OpenSansFamily,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Normal
+            fontWeight = FontWeight.Medium
         ),
         contentFAB = TextStyle(
             fontFamily = OpenSansFamily,
@@ -39,7 +39,8 @@ fun AppTheme(
         fabColor = Color(0xFFF2DDB8),
         searchTextFieldColor = Color(0xFFF1E7D9),
         searchItemColor = Color(0xFF4D4639),
-        contentFAB = Color(0xFF52452A)
+        contentFAB = Color(0xFF52452A),
+        chipColor = Color(0xFFF2DDB8)
     )
 
     CompositionLocalProvider(

@@ -50,6 +50,7 @@ import com.ad_coding.noteappcourse.R
 import com.example.note.feature_note.presentation.Screen
 import com.example.note.feature_note.presentation.notes.composements.NoteItem
 import com.example.note.feature_note.presentation.notes.composements.OrderSection
+import com.example.note.feature_note.presentation.notes.composements.SearchTextField
 import com.example.note.ui.theme.AppTheme
 import com.example.note.ui.theme.NoteTheme
 
@@ -69,7 +70,7 @@ fun HomeScreen(
             .padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
+        SearchTextField(searchKeyword = searchKeyword, viewModel = viewModel)
         Spacer(modifier = Modifier.height(10.dp))
         OrderSection(
             onOrderChange = {
