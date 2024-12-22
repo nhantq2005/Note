@@ -9,7 +9,8 @@ data class AppColor(
     val fabColor: Color = Color.Unspecified,
     val contentFAB: Color = Color.Unspecified,
     val bottomBarColor: Color = Color.Unspecified,
-    val chipColor: Color = Color.Unspecified
+    val chipColor: Color = Color.Unspecified,
+    val actionLabel:Color = Color.Unspecified
 )
 
 val LocalAppColor = staticCompositionLocalOf {

@@ -34,35 +34,26 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.note.feature_note.domain.model.Note
 import com.example.note.feature_note.presentation.Screen
-import com.example.note.feature_note.presentation.add_edit_note.composements.ColorButtons
 import com.example.note.feature_note.presentation.add_edit_note.composements.TransparentTextField
-import com.example.note.feature_note.presentation.notes.NoteEvent
 import com.example.note.feature_note.presentation.notes.composements.PinButton
 import com.example.note.ui.theme.AppTheme
-import com.example.note.ui.theme.mintGreen
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -107,11 +98,13 @@ fun AddEditNoteScreen(
                 ),
                 containerColor = AppTheme.appColor.bottomBarColor
             ) {
+                //Back to Home Screen button
                 IconButton(onClick = {
                     navController.navigate(Screen.HomeScreen.route)
                 }) {
                     Icon(Icons.Outlined.Home, contentDescription = "Back Home Button")
                 }
+                //Pin note
                 PinButton(isPinned = pinState.isPinned) {
                     viewModel.onEvent(AddEditNoteEvent.PinnedNote(pinState.isPinned))
                 }
@@ -119,11 +112,6 @@ fun AddEditNoteScreen(
                     viewModel.onEvent(AddEditNoteEvent.ToggleColorSection)
                 }) {
                     Icon(Icons.Outlined.Palette, contentDescription = "Palette Color")
-                }
-                IconButton(onClick = {
-//                        viewModel.onEvent(AddEditNoteEvent.DeleteNote(note))
-                }) {
-                    Icon(Icons.Outlined.Delete, contentDescription = "Delete Button")
                 }
             }
 
@@ -159,10 +147,11 @@ fun AddEditNoteScreen(
                     onFocusChange = {
                         viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
                     },
-                    textStyle = AppTheme.appTypograhy.content
+                    textStyle = AppTheme.appTypograhy.content,
+                    modifier = Modifier.fillMaxSize()
                 )
-
             }
+            //Animation to show color buttons
             AnimatedVisibility(
                 visible = state.isColorButtonsVisible,
                 enter = fadeIn() + slideInVertically(),
@@ -170,8 +159,6 @@ fun AddEditNoteScreen(
                 modifier = Modifier.align(Alignment.BottomCenter)
                     .padding(5.dp)
             ) {
-//            ColorButtons(noteColor = noteColor, scope = scope, viewModel = viewModel)
-
                 LazyRow(modifier = Modifier.fillMaxWidth()) {
                     items(Note.noteColors) { color ->
                         val colorInt = color.toArgb()
@@ -182,6 +169,7 @@ fun AddEditNoteScreen(
                             .background(color)
                             .border(
                                 width = 3.dp,
+                                //check which color button is selected
                                 color = if (viewModel.noteColor.value == colorInt) {
                                     Color.Black
                                 } else {
@@ -207,7 +195,6 @@ fun AddEditNoteScreen(
                 }
             }
         }
-
     }
     Box(modifier = Modifier.fillMaxSize()) {
         FloatingActionButton(
@@ -225,15 +212,6 @@ fun AddEditNoteScreen(
                 tint = AppTheme.appColor.contentFAB
             )
         }
-
-
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewAddEditScreen() {
-//    NoteTheme {
-//        AddEditNoteScreen()
-//    }
-//}

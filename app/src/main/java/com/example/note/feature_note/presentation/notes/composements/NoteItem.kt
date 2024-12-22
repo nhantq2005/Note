@@ -16,6 +16,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -58,7 +59,7 @@ fun NoteItem(
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(0.9f)
-                    .padding(10.dp)
+                    .padding(15.dp)
             ) {
                 Text(
                     text = note.title,
@@ -83,6 +84,7 @@ fun NoteItem(
                 PinButton(isPinned = note.isPin) {
                     viewModel.onEvent(NoteEvent.PinnedNote(note))
                 }
+                //Show snackbar when delete note
                 IconButton(onClick = {
                     viewModel.onEvent(NoteEvent.DeleteNote(note))
                     scope.launch {

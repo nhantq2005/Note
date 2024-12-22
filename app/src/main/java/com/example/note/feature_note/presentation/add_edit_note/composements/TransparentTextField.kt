@@ -32,13 +32,14 @@ fun TransparentTextField(
     onChangeValue: (String) -> Unit,
     isSingleLine: Boolean = false,
     onFocusChange: (FocusState) -> Unit,
-    textStyle: TextStyle
+    textStyle: TextStyle,
+    modifier: Modifier =Modifier
 ) {
     TextField(
         value = text,
         onValueChange = onChangeValue,
         textStyle = textStyle,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .onFocusChanged {
                 onFocusChange(it)
@@ -63,9 +64,6 @@ fun TransparentTextField(
 @Composable
 fun PreviewTextField() {
     NoteTheme {
-        var textvalue by remember {
-            mutableStateOf("")
-        }
-//        TransparentTextField(text = textvalue, onChangeValue = {textvalue = it}, onFocusChange = {})
+
     }
 }

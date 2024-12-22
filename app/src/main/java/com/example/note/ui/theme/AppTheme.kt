@@ -14,7 +14,7 @@ fun AppTheme(
     val typography = AppTypography(
         title = TextStyle(
             fontFamily = OpenSansFamily,
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold
         ),
         content = TextStyle(
@@ -29,7 +29,7 @@ fun AppTheme(
         ),
         placeHolder = TextStyle(
             fontFamily = OpenSansFamily,
-            fontSize = 20.sp,
+            fontSize = 17.sp,
             fontWeight = FontWeight.Medium
         )
     )
@@ -40,7 +40,8 @@ fun AppTheme(
         searchTextFieldColor = Color(0xFFF1E7D9),
         searchItemColor = Color(0xFF4D4639),
         contentFAB = Color(0xFF52452A),
-        chipColor = Color(0xFFF2DDB8)
+        chipColor = Color(0xFFF2DDB8),
+        actionLabel = Color(0xFFE9C16C)
     )
 
     CompositionLocalProvider(

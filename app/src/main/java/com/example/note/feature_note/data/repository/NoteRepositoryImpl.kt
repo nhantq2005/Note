@@ -12,9 +12,9 @@ class NoteRepositoryImpl(
         return dao.getNote()
     }
 
-//    override suspend fun getNotesByTitle(title: String): Flow<List<Note>> {
-//        return dao.getNotesByTitle(title)
-//    }
+    override fun getNotesByTitle(title: String): Flow<List<Note>> {
+        return dao.getNotesByTitle(title)
+    }
 
     override suspend fun getNoteById(id: Int): Note? {
         return dao.getNoteById(id)

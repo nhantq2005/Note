@@ -48,6 +48,7 @@ class AddEditViewModel @Inject constructor(
     private var currentNoteId: Int? = null
 
     //Show Content and Title of note
+    //get note by id
     init {
         savedStateHandle.get<Int>("noteId")?.let { noteId ->
             if (noteId != -1) {
@@ -137,12 +138,6 @@ class AddEditViewModel @Inject constructor(
                     isColorButtonsVisible = !state.value.isColorButtonsVisible
                 )
             }
-
-            is AddEditNoteEvent.DeleteNote -> {
-
-            }
-
-            else -> {}
         }
     }
 

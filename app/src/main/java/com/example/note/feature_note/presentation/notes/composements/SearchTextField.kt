@@ -3,6 +3,7 @@ package com.example.note.feature_note.presentation.notes.composements
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -28,8 +29,8 @@ fun SearchTextField(
     TextField(
         value = searchKeyword.keyword,
         onValueChange = {
-                                viewModel.onEvent(NoteEvent.EnteredSearch(it))
-//                                if(searchKeyword.keyword.isNotEmpty()) viewModel.onEvent(NoteEvent.FindNote(it))
+            viewModel.onEvent(NoteEvent.EnteredSearch(it))
+            viewModel.onEvent(NoteEvent.FindNote(searchKeyword.keyword))
         },
         maxLines = 1,
         placeholder = {
@@ -39,17 +40,12 @@ fun SearchTextField(
                 color = AppTheme.appColor.searchItemColor
             )
         },
-        trailingIcon = {
-            IconButton(onClick = {
-//                        searchKeyword.keyword= ""
-            }) {
-                Icon(
-                    Icons.Default.Search,
-                    contentDescription = "Search Button",
-                    tint = AppTheme.appColor.searchItemColor
-                )
-            }
-        },
+
+        leadingIcon = {
+            Icon(
+                Icons.Default.Search,
+                contentDescription = "Search Icon"
+            ) },
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(27.dp),
         textStyle = AppTheme.appTypograhy.placeHolder,

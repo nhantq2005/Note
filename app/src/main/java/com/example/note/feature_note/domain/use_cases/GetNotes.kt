@@ -18,7 +18,6 @@ class GetNotes(
                 is NoteOrder.Date -> {
                     notes.sortedBy { -it.timeStamp  }.sortedBy { !it.isPin }
                 }
-
                 is NoteOrder.Title -> {
                     notes.sortedBy { it.title.lowercase() }.sortedBy { !it.isPin }
                 }

@@ -10,7 +10,7 @@ sealed class NoteEvent {
 
     data class PinnedNote(val note: Note):NoteEvent()
 
-//    data class FindNote(val noteTitle:String):NoteEvent()
+    data class FindNote(val noteTitle:String):NoteEvent()
 
     data class EnteredSearch(val keyword:String):NoteEvent()
 
