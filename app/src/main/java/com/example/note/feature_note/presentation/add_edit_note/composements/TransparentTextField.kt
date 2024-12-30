@@ -54,7 +54,8 @@ fun TransparentTextField(
             textColor = Color.Black,
             focusedLabelColor = Color.Black,
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
+            cursorColor = Color.Black
         )
 
     )
